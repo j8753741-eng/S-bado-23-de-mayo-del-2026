@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SÁBADO 23 DE MAYO DEL 2026</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:auto;
+    background:
+    radial-gradient(circle at top, rgba(174,0,255,0.25), transparent 40%),
+    radial-gradient(circle at bottom, rgba(255,0,149,0.18), transparent 40%),
+    linear-gradient(135deg,#090014,#120020,#1a002d,#090014);
+    font-family:'Cormorant Garamond', serif;
+    padding:40px;
+    color:white;
+}
+
+/* DESTELLOS */
+
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    filter:blur(100px);
+    z-index:0;
+}
+
+body::before{
+    background:#a100ff;
+    top:-120px;
+    left:-120px;
+    opacity:0.25;
+}
+
+body::after{
+    background:#ff4fd8;
+    bottom:-150px;
+    right:-120px;
+    opacity:0.15;
+}
+
+/* CARTA */
+
+.carta{
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:950px;
+    padding:70px;
+    border-radius:35px;
+    background:rgba(255,255,255,0.06);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:
+    0 0 40px rgba(177,0,255,0.25),
+    inset 0 0 40px rgba(255,255,255,0.03);
+    overflow:hidden;
+}
+
+/* DETALLES */
+
+.carta::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:35px;
+    padding:2px;
+    background:linear-gradient(135deg,#d36bff,#ffffff33,#ff79e9);
+    -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    pointer-events:none;
+}
+
+.fecha{
+    text-align:center;
+    font-size:1.2rem;
+    letter-spacing:2px;
+    opacity:0.8;
+    margin-bottom:35px;
+}
+
+h1{
+    text-align:center;
+    font-family:'Great Vibes', cursive;
+    font-size:4.4rem;
+    color:#ffd6ff;
+    margin-bottom:45px;
+    text-shadow:
+    0 0 10px #ff8df8,
+    0 0 25px #c400ff,
+    0 0 45px #9d00ff;
+}
+
+.contenido{
+    font-size:1.5rem;
+    line-height:2.2rem;
+    text-align:justify;
+    color:#f6eaff;
+}
+
+.contenido p{
+    margin-bottom:32px;
+}
+
+strong{
+    color:#ffd2ff;
+    font-weight:700;
+}
+
+/* FIRMA */
+
+.firma{
+    margin-top:55px;
+    text-align:right;
+    font-size:1.4rem;
+    color:#eec8ff;
+}
+
+/* FRASE NEÓN */
+
+.frase-final{
+    margin-top:70px;
+    text-align:center;
+    font-size:1.8rem;
+    line-height:3rem;
+    color:#f0b3ff;
+    font-weight:600;
+    text-shadow:
+    0 0 5px #d000ff,
+    0 0 15px #d000ff,
+    0 0 35px #c400ff,
+    0 0 60px #9400ff;
+    animation:neon 2.5s infinite alternate;
+}
+
+@keyframes neon{
+    from{
+        opacity:0.85;
+    }
+    to{
+        opacity:1;
+        text-shadow:
+        0 0 10px #e66fff,
+        0 0 25px #c800ff,
+        0 0 50px #b100ff,
+        0 0 90px #8a00ff;
+    }
+}
+
+/* BOTÓN */
+
+.boton-container{
+    display:flex;
+    justify-content:center;
+    margin-top:60px;
+}
+
+button{
+    padding:18px 40px;
+    border:none;
+    border-radius:50px;
+    font-size:1.1rem;
+    cursor:pointer;
+    background:linear-gradient(135deg,#a100ff,#ff4fd8);
+    color:white;
+    font-weight:bold;
+    letter-spacing:1px;
+    box-shadow:
+    0 0 20px rgba(212,0,255,0.4);
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.07);
+    box-shadow:
+    0 0 35px rgba(255,0,234,0.7);
+}
+
+/* VENTANA */
+
+.modal{
+    display:none;
+    position:fixed;
+    z-index:999;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.8);
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.modal-content{
+    width:100%;
+    max-width:600px;
+    padding:45px;
+    border-radius:25px;
+    background:rgba(20,0,35,0.95);
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow:
+    0 0 40px rgba(183,0,255,0.5);
+    text-align:center;
+    color:white;
+}
+
+.modal-content h2{
+    margin-bottom:25px;
+    font-size:2.2rem;
+    color:#f0c2ff;
+}
+
+.modal-content p{
+    font-size:1.3rem;
+    line-height:2rem;
+}
+
+/* AQUÍ ESCRIBES TU MENSAJE */
+.mensaje-personalizado{
+    margin-top:20px;
+    color:#ffdfff;
+}
+
+.cerrar{
+    margin-top:30px;
+    background:#ff4fd8;
+}
+
+@media(max-width:768px){
+
+    .carta{
+        padding:40px 28px;
+    }
+
+    h1{
+        font-size:3.2rem;
+    }
+
+    .contenido{
+        font-size:1.25rem;
+        line-height:2rem;
+    }
+
+    .frase-final{
+        font-size:1.4rem;
+        line-height:2.4rem;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="carta">
+
+<div class="fecha">
+<strong>Sábado, 23 de mayo de 2026 — Noche</strong>
+</div>
+
+<h1>MI MUJER HERMOSA</h1>
+
+<div class="contenido">
+
+<p>
+Esta noche no puedo dejar de pensar en ti. Hay algo en el silencio de la noche que siempre termina llevándome hacia tu nombre, hacia tu sonrisa, hacia esa forma tan tuya de hacer que mi corazón se sienta completamente rendido de amor.
+</p>
+
+<p>
+A veces me pregunto cómo alguien pudo volverse tan importante para mí en tan poco tiempo. Porque no eres solo la persona que amo… eres la persona que logró quedarse en cada rincón de mi mente, en cada pensamiento bonito, en cada sueño que tengo para el futuro. Y créeme, no hay un solo día en el que no agradezca haberte encontrado.
+</p>
+
+<p>
+Esta noche quisiera abrazarte fuerte, quedarme contigo sin mirar la hora, perderme en tus ojos y decirte bajito cuánto te amo mientras el mundo desaparece alrededor de nosotros. Porque contigo todo se siente distinto… más intenso, más real, más vivo. Tú haces que mi corazón lata de una manera que nadie más podría lograr.
+</p>
+
+<p>
+Y sí, te extraño incluso cuando apenas pasa un momento sin ti. Extraño tu voz, tu cariño, tus mensajes, tu manera de hacerme sentir amado sin siquiera intentarlo. Me encantas demasiado, mi amor… demasiado. Hay noches como esta donde las ganas de tenerte cerca me consumen lentamente, donde quisiera robarle tiempo al mundo solo para quedarme contigo un poquito más.
+</p>
+
+<p>
+Quiero que nunca dudes de lo que siento por ti. Porque lo mío contigo no es pasajero, no es pequeño, no es cualquier cosa. Lo que siento por ti es profundo, inmenso y completamente sincero. Eres esa persona que logró tocar mi alma de la manera más hermosa posible.
+</p>
+
+<p>
+Y mientras esta noche avanza, solo quiero que recuerdes algo: aquí tienes a alguien que te ama con locura, con ternura, con pasión y con todo el corazón. Alguien que incluso en medio de la noche sigue pensando que tú eres lo más bonito que le ha pasado en la vida.
+</p>
+
+<p>
+Te amo muchísimo, mi niña hermosa. ❤️
+</p>
+
+</div>
+
+<div class="firma">
+<strong>JUAN KALETH MENDOZA PRIMERA 💜</strong>
+</div>
+
+<div class="frase-final">
+“Y si algún día las estrellas dejaran de brillar, aún así el universo seguiría siendo hermoso… porque existirías tú. Porque desde que llegaste a mi vida, entendí que el amor verdadero sí tiene nombre, sí tiene mirada, sí tiene alma… y la mía siempre encontrará paz cuando pronuncie suavemente el tuyo: <strong>VALERIA PETRO VILLAZÓN</strong>.”
+</div>
+
+<div class="boton-container">
+<button onclick="abrirVentana()">Presiona aquí, mi amor ✨</button>
+</div>
+
+</div>
+
+<!-- VENTANA -->
+
+<div class="modal" id="ventana">
+
+<div class="modal-content">
+
+<h2>Para Ti ❤️</h2>
+
+<p class="mensaje-personalizado">
+
+Hoy tenia tantas ganas de cogerte y darte duro, por eso en el salon te estaba tocando la pierna y luego subía la mano a la altura de tu cintura y apretaba la mano y también intente llevarla a otro lado pero me detuviste y me contuve, pero bueno he aguantado mucho tiempo con las ganas que te tengo que importa si espero un poco más. 
+
+
+</p>
+  <p><strong>QUIERO QUE SEPAS QUE APARTIR DE HOY VOY A EMPEZAR A VIVIR AL LÍMITE YA QUE HOY ESTAMOS AQUÍ Y MAÑANA NO LO SABEMOS</strong></p>
+  <p><strong> ET PAR LÀ, JE VEUX DIRE QUE JE ME FICHE DE QUI EST DEVANT OU PRÈS JE VAIS T’EMBRASSER, POUR TOI TU ES À MOI ET JE PEUX T’EMBRASSER QUAND JE VEUX VALERIA PETRO VILLAZÓN </strong></p>
+  <P>y hay que hablar qué otro tema pero ese lo hablamos después ya que va a llevar mucho tiempo</P>
+
+<button class="cerrar" onclick="cerrarVentana()">Cerrar</button>
+
+</div>
+
+</div>
+
+<script>
+
+function abrirVentana(){
+    document.getElementById("ventana").style.display="flex";
+}
+
+function cerrarVentana(){
+    document.getElementById("ventana").style.display="none";
+}
+
+</script>
+
+</body>
+  </html>
